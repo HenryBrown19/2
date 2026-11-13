@@ -41,6 +41,7 @@ public class Astronaut {
 
         xpos = xpos + dx;
         ypos = ypos + dy;
+        bounce();
         System. out.println(xpos);
     }
     // todo: make a method called bounce

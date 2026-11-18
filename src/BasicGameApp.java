@@ -24,95 +24,107 @@ import javax.swing.JPanel;
 
 public class BasicGameApp implements Runnable {
 
-   //Variable Definition Section
-   //Declare the variables used in the program 
-   //You can set their initial values too
-   public int randomNumber;
-   //Sets the width and height of the program window
-	final int WIDTH = 1000;
-	final int HEIGHT = 700;
+    //Variable Definition Section
+    //Declare the variables used in the program
+    //You can set their initial values too
+    public int randomNumber;
+    //Sets the width and height of the program window
+    final int WIDTH = 1000;
+    final int HEIGHT = 700;
 
-   //Declare the variables needed for the graphics
-	public JFrame frame;
-	public Canvas canvas;
-   public JPanel panel;
-   
-	public BufferStrategy bufferStrategy;
-	public Image astroPic;
+    //Declare the variables needed for the graphics
+    public JFrame frame;
+    public Canvas canvas;
+    public JPanel panel;
 
-   //Declare the objects used in the program
-   //These are things that are made up of more than one variable type
-	public Astronaut astro2;
+    public BufferStrategy bufferStrategy;
+    public Image astroPic;
+    public Image backgroundpic;
+
+    //Declare the objects used in the program
+    //These are things that are made up of more than one variable type
+    public Astronaut astro2;
     public Astronaut astro;
     public Astronaut astro3;
 
-   // Main method definition
-   // This is the code that runs first and automatically
-	public static void main(String[] args) {
-		BasicGameApp ex = new BasicGameApp();   //creates a new instance of the game
-		new Thread(ex).start();                 //creates a threads & starts up the code in the run( ) method  
-	}
+    // Main method definition
+    // This is the code that runs first and automatically
+    public static void main(String[] args) {
+        BasicGameApp ex = new BasicGameApp();   //creates a new instance of the game
+        new Thread(ex).start();                 //creates a threads & starts up the code in the run( ) method
+    }
 
 
-   // Constructor Method
-   // This has the same name as the class
-   // This section is the setup portion of the program
-   // Initialize your variables and construct your program objects here.
-	public BasicGameApp() {
-      
-      setUpGraphics();
-       randomNumber = (int)(Math.random()*10) +1;
-      //variable and objects
-      //create (construct) the objects needed for the game and load up 
-		astroPic = Toolkit.getDefaultToolkit().getImage("astronaut.png"); //load the picture
-		astro = new Astronaut(10,100);
+    // Constructor Method
+    // This has the same name as the class
+    // This section is the setup portion of the program
+    // Initialize your variables and construct your program objects here.
+    public BasicGameApp() {
+
+        setUpGraphics();
+        randomNumber = (int) (Math.random() * 10) + 1;
+        //variable and objects
+        //create (construct) the objects needed for the game and load up
+        astroPic = Toolkit.getDefaultToolkit().getImage("astronaut.png"); //load the picture
+        backgroundpic = Toolkit.getDefaultToolkit().getImage(".jpg"); //load the picture
+
+        astro = new Astronaut(10, 100);
         astro2 = new Astronaut(300, 10);
-        System. out.println(astro2.dx);
+        System.out.println(astro2.dx);
         astro.dx = 25;
         astro2.dy = randomNumber;
 
         // create astro 3
-        astro3 = new Astronaut (10,10);
-        astro3.xpos = (int)(Math.random()*900);
-        astro3.ypos = (int)(Math.random()*600);
-        astro3.dx = (int)(Math.random()*10)+1;
-        astro3.dy = (int)(Math.random()*10)+1;
+        astro3 = new Astronaut(10, 10);
+        astro3.xpos = (int) (Math.random() * 900);
+        astro3.ypos = (int) (Math.random() * 600);
+        astro3.dx = (int) (Math.random() * 10) + 1;
+        astro3.dy = (int) (Math.random() * 10) + 1;
 
 
-      //  public Astronaut
+        //  public Astronaut
 
 
-	}// BasicGameApp()
+    }// BasicGameApp()
 
-   
+
 //*******************************************************************************
 //User Method Section
 //
 // put your code to do things here.
 
-   // main thread
-   // this is the code that plays the game after you set things up
-	public void run() {
+    // main thread
+    // this is the code that plays the game after you set things up
+    public void run() {
 
-      //for the moment, we will loop things forever.
-		while (true) {
+        //for the moment, we will loop things forever.
+        while (true) {
 
-         moveThings();  //move all the game objects
-         render();  // paint the graphics
-         pause(20); // sleep for 10 ms
-		}
-	}
+            moveThings();  //move all the game objects
+            render();  // paint the graphics
+            pause(20); // sleep for 10 ms
+        }
+    }
 
 
-	public void moveThings()
-	{
-      //calls the move( ) code in the objects
-		astro.move();
+    public void moveThings() {
+        "Chrashing"
+        //calls the move( ) code in the objects
+        astro.move();
         astro2.move();
         astro3.move();
 
-	}
-	
+    }
+
+    public void chrashing() {
+     if(astro.hitbox.intersects(astro2.hitbox)){
+         System.out.println("crash");
+         astro.dx = -astro2.dx;
+    }
+
+}
+
+
    //Pauses or sleeps the computer for the amount specified in milliseconds
    public void pause(int time ){
    		//sleep
@@ -160,6 +172,8 @@ public class BasicGameApp implements Runnable {
 		g.clearRect(0, 0, WIDTH, HEIGHT);
 
       //draw the image of the astronaut
+        g.drawImage(backgroundpic,0, 0, WIDTH, HEIGHT, null);
+
 		g.drawImage(astroPic, astro.xpos, astro.ypos, astro.width, astro.height, null);
         g.drawImage(astroPic, astro2.xpos, astro.ypos, astro.width, astro.height, null);
         g.drawImage(astroPic, astro3.xpos, astro3.ypos, astro3.width, astro3.height, null);

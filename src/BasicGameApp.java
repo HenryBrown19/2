@@ -108,19 +108,45 @@ public class BasicGameApp implements Runnable {
 
 
     public void moveThings() {
-        "Chrashing"
+
         //calls the move( ) code in the objects
         astro.move();
         astro2.move();
         astro3.move();
 
+        chrashing();
+
     }
 
     public void chrashing() {
-     if(astro.hitbox.intersects(astro2.hitbox)){
+     if(astro.hitbox.intersects(astro2.hitbox) && astro.isCrashing == false){
          System.out.println("crash");
          astro.dx = -astro2.dx;
+
+         astro.width = astro.width + 10;
+         astro.height = astro.height + 10;
+
+         astro2.width = astro2.width + 10;
+         astro2.height = astro2.height + 10;
+         astro.isCrashing = true;
+
+         astro.hitbox.setBounds(astro.xpos, astro.ypos, astro.width, astro.height);
+         astro2.hitbox.setBounds(astro2.xpos, astro2.ypos, astro2.width, astro2.height);
+
+         // Make astronuat 2 disappear
+
+
+
+
+
     }
+
+
+     if(!astro.hitbox.intersects(astro2.hitbox)){ // when they are not
+         astro.isCrashing = false;
+
+     }
+
 
 }
 
@@ -175,7 +201,7 @@ public class BasicGameApp implements Runnable {
         g.drawImage(backgroundpic,0, 0, WIDTH, HEIGHT, null);
 
 		g.drawImage(astroPic, astro.xpos, astro.ypos, astro.width, astro.height, null);
-        g.drawImage(astroPic, astro2.xpos, astro.ypos, astro.width, astro.height, null);
+        g.drawImage(astroPic, astro2.xpos, astro2.ypos, astro2.width, astro2.height, null);
         g.drawImage(astroPic, astro3.xpos, astro3.ypos, astro3.width, astro3.height, null);
 
         // end coding here

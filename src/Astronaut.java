@@ -17,6 +17,7 @@ public class Astronaut {
     public boolean isAlive;
 
     public Rectangle hitbox;
+    public boolean isCrashing;
 
     //a boolean to denote if the hero is alive or dead.
 
@@ -38,6 +39,7 @@ public class Astronaut {
         height = 60;
         isAlive = true;
         hitbox = new Rectangle(xpos,ypos,width,height);
+        isCrashing = false;
 
 
     } // constructor
@@ -48,6 +50,8 @@ public class Astronaut {
         xpos = xpos + dx;
         ypos = ypos + dy;
         bounce();
+
+        hitbox.setBounds(xpos, ypos,width,height);
         System. out.println(xpos);
     }
     // todo: make a method called bounce
